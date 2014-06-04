@@ -1,1 +1,4 @@
-placeholder
+This DFA checks for an even number of 0s (reject)
+1: 0,1|state0,state1|state0|state0:1-state0,0-state1/state1:1-state1,0-state0|state0|01010
+This DFA checks for an even number of 0s (accept)
+2: 0,1|state0,state1|state0|state0:1-state0,0-state1/state1:1-state1,0-state0|state0|01010
