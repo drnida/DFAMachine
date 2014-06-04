@@ -4,9 +4,9 @@ dfa.py takes a command line argument (integer) corresponding to one of the follo
  Sigma|      Q      |  q0  |   transition function => current:input-dest     |  F   | input string (accepts)
 1: L = {w | w contains an even number of 0s} (reject)
    0,1|state0,state1|state0|state0:1-state0,0-state1/state1:1-state1,0-state0|state0|01010
-2: L = {w | w contains an even number of 0s} (reject)
+2: L = {w | w contains an even number of 0s} (accept)
    0,1|state0,state1|state0|state0:1-state0,0-state1/state1:1-state1,0-state0|state0|010100
-3: L = {w | w contains an even number of 0s} (reject)
+3: L = {w | w contains an even number of 0s} (accept)
    0,1|state0,state1|state0|state0:1-state0,0-state1/state1:1-state1,0-state0|state0|
 4: L = {w | w is a multiple of 3 in base 3} (accept)
    0,1,2|stateA,stateB,stateC|stateA|stateA:0-stateA,1-stateB,2-stateC/stateB:0-stateA,1-stateB,2-stateC/stateC:0-stateA,1-stateB,2-stateC|stateA|1201210
