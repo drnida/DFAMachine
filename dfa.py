@@ -1,56 +1,55 @@
 import sys
 
 encode_file = open('encode.dat', 'r')
-for x in range(int(sys.argv[1]) - 1):
+for x in range(4):
+    encode_file.readline()
+
+for x in range((int(sys.argv[1]) - 1) * 2 + 1):
 	  encode_file.readline()
-	  encoding = encode_file.readline()
-	  sigma = encoding.split('|')[0]
-	  states = encoding.split('|')[1]
-	  start = encoding.split('|')[2]
-	  delta = encoding.split('|')[3]
-	  final = encoding.split('|')[4]
-	  string = encoding.split('|')[5]
+encoding = encode_file.readline()
+encoding = encoding[3:]
+print "Encoding:  " + encoding
+sigma = encoding.split('|')[0]
+states = encoding.split('|')[1]
+start = encoding.split('|')[2]
+delta = encoding.split('|')[3]
+final = encoding.split('|')[4]
+string = encoding.split('|')[5]
+
+
+print "--------------lines----------"
+print sigma
+print states
+print start
+print delta
+print final
+print string
+print"----------------------------"
+
+
+states = states.split(",")
+sigma = sigma.split(",")
+final = final.split(",")
 
 
 
-
-	  temp = []
-	  transitions = []
-	  states = states.split(';')
-	  state_list = []
-	  for state in states:
-		    state_list.append(state.split(','))
-		    for state in state_list:
-			      for transition in state:
-				           temp.append(transition.split('->'))
-					     transitions.append(temp)
-					       temp = []
-					       print transitions
-
-
-
-
-
-
-STATES = ["state1","state2","state3","state4","state0"]
-SIGMA = ["0","1","2","3","4","5","6"]
-
-DFA = dict.fromkeys(STATES, None)
+DFA = dict.fromkeys(states, None)
 for x in DFA:
-    DFA[x] = dict.fromkeys(SIGMA, None)
+    DFA[x] = dict.fromkeys(sigma, None)
 
 
 
+print "\nthe dict-------------------------"
 print DFA
 print "the dict-------------------------"
 
 
 
-m = "state0:0-state2,1-state1/state1:0-state0,1-state2/state2:0-state1,1-state2/state2:4-state1,5-state2"
-print m
-print "\n"
-Q = m.split("/")
-print Q
+#m = "state0:0-state2,1-state1/state1:0-state0,1-state2/state2:0-state1,1-state2/state2:4-state1,5-state2"
+#print m
+#print "\n"
+Q = delta.split("/")
+print "Q is ----- " + str(Q)
 print "\n"
 
 print "input----------------------------"
@@ -60,7 +59,7 @@ print "input----------------------------"
 for x in range(len(Q)):
 
      state = Q[x].split(":")
-     #print state
+     print "states is " + str(state)
      deltas = state[1].split(",")
      print deltas
 
@@ -85,22 +84,24 @@ for x in DFA:
 
 
 currentState = "state0"
-inputString = "011001"
 
-inputString = list(inputString)
-print inputString
+string = list(string)
+print string
 
-for x in range(len(inputString)):
+for x in range(len(string)):
     print "Current state is " + currentState
-    print "Input is " + inputString[x]
+    print "Input is " + string[x]
 
-    currentState = DFA[currentState][inputString[x]]
+    currentState = DFA[currentState][string[x]]
 
     print "Transitioned to " + currentState
 
 print "Final state is " + currentState
 
-
+if currentState in final:
+    print "ACCEPT"
+else:
+    print "REJECT"
 
 
 
