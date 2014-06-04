@@ -1,3 +1,36 @@
+import sys
+
+encode_file = open('encode.dat', 'r')
+for x in range(int(sys.argv[1]) - 1):
+	  encode_file.readline()
+	  encoding = encode_file.readline()
+	  sigma = encoding.split('|')[0]
+	  states = encoding.split('|')[1]
+	  start = encoding.split('|')[2]
+	  delta = encoding.split('|')[3]
+	  final = encoding.split('|')[4]
+	  string = encoding.split('|')[5]
+
+
+
+
+	  temp = []
+	  transitions = []
+	  states = states.split(';')
+	  state_list = []
+	  for state in states:
+		    state_list.append(state.split(','))
+		    for state in state_list:
+			      for transition in state:
+				           temp.append(transition.split('->'))
+					     transitions.append(temp)
+					       temp = []
+					       print transitions
+
+
+
+
+
 
 STATES = ["state1","state2","state3","state4","state0"]
 SIGMA = ["0","1","2","3","4","5","6"]
