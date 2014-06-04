@@ -1,5 +1,9 @@
 import sys
 
+#needs error checking for invalid argv value 
+
+
+
 encode_file = open('encode.dat', 'r')
 for x in range(4):
     encode_file.readline()
@@ -26,13 +30,20 @@ print final
 print string
 print"----------------------------"
 
-
+#Listifying input
 states = states.split(",")
 sigma = sigma.split(",")
 final = final.split(",")
+currentState = start
+string = list(string)
+print string
+try:
+    string.remove("\n")
+except:
+    pass
+print string
 
-
-
+#Building empty DFA from states and sigma
 DFA = dict.fromkeys(states, None)
 for x in DFA:
     DFA[x] = dict.fromkeys(sigma, None)
@@ -45,9 +56,10 @@ print "the dict-------------------------"
 
 
 
-#m = "state0:0-state2,1-state1/state1:0-state0,1-state2/state2:0-state1,1-state2/state2:4-state1,5-state2"
-#print m
-#print "\n"
+#example transition string 
+#"state0:0-state2,1-state1/state1:0-state0,1-state2/state2:0-state1,1-state2/state2:4-state1,5-state2"
+
+#Parse transitions string and add transitions to the DFA
 Q = delta.split("/")
 print "Q is ----- " + str(Q)
 print "\n"
@@ -83,11 +95,8 @@ for x in DFA:
     print x + "|||" + str(DFA[x])
 
 
-currentState = "state0"
 
-string = list(string)
-print string
-
+#Traverse DFA and accept or reject
 for x in range(len(string)):
     print "Current state is " + currentState
     print "Input is " + string[x]
@@ -96,7 +105,9 @@ for x in range(len(string)):
 
     print "Transitioned to " + currentState
 
-print "Final state is " + currentState
+print "Current State is:  " + currentState + ", Final States are: " + str(final)
+
+
 
 if currentState in final:
     print "ACCEPT"
