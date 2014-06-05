@@ -20,3 +20,6 @@ dfa.py takes a command line argument (integer) corresponding to one of the follo
    a,b|0,1,2,3|0|0:a-0,b-1/1:a-2,b-1/2:a-0,b-3/3:a-3,b-3|3|abbbaaaababaaab
 9: L = {w | w = xbaby where x, y are in sigma*} (reject)
    a,b|0,1,2,3|0|0:a-0,b-1/1:a-2,b-1/2:a-0,b-3/3:a-3,b-3|3|abbbaaaabbaabaaab
+N: L = {w | w contains an even number of 0s} (accept) IMPROPERLY FORMED DFA!!
+   0,1|state0,state1|state0|state0:1-state0,0-state1/state1:1-state1|state0|010100
+

@@ -56,7 +56,7 @@ print "the dict-------------------------"
 
 
 
-#example transition string 
+#Example transition string 
 #"state0:0-state2,1-state1/state1:0-state0,1-state2/state2:0-state1,1-state2/state2:4-state1,5-state2"
 
 #Parse transitions string and add transitions to the DFA
@@ -76,13 +76,19 @@ for x in range(len(Q)):
      print deltas
 
      for y in range(len(deltas)):
-         sigma = deltas[y].split("-") 
-         
+         transition = deltas[y].split("-") 
+
 	 #state[0] is the state index, 
-	 #sigma[0] is the alphabet index, sigma[1] is the state to transition to. 
-	 DFA[state[0]][sigma[0]] = sigma[1] 
+	 #sigma[0] is the alphabet index, transition[1] is the state to transition to. 
+	 DFA[state[0]][transition[0]] = transition[1] 
 
 
+#Checks that all states have transitions for all elements of sigma
+for x in DFA:
+    for y in DFA[x]:
+        if  DFA[x][y] == None:
+            print "ERROR!!! Not all states have transitions on all input! Not a proper DFA"
+            exit()
 
 
 print "DFA populated------------------"
