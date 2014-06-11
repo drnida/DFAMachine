@@ -50,10 +50,6 @@ for x in DFA:
 
 
 
-print "\nthe dict-------------------------"
-print DFA
-print "the dict-------------------------"
-
 
 
 #Example transition string 
@@ -94,11 +90,11 @@ for x in DFA:
 print "DFA populated------------------"
 print DFA
 print "\n"
+print "-------------------------------"
 
-
-print "DFA by line------------------"
-for x in DFA:
-    print x + "|||" + str(DFA[x])
+#print "DFA by line------------------"
+#for x in DFA:
+#    print x + "|||" + str(DFA[x])
 
 
 
