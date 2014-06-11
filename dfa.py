@@ -1,9 +1,23 @@
 import sys
 
-#needs error checking for invalid argv value 
+#Reads in an encoding of a DFA and an input string from file.
+#Constructs a DFA from the encoding and then runs the DFA
+#on the input string. Displays Input, DFA, and processing of
+#the input string.
+
+#DFA is implemented with a dictionary with each state as
+#a key and each value being a dictionary of transitions 
+#for that state. Characters from sigma are keys in the 
+#transition dictionary and values are the state to 
+#transition to. 
 
 
 
+
+
+print "Usage: dfa.py <input> \nInput can be 1-10"
+
+#Read in from file and split input
 encode_file = open('encode.dat', 'r')
 for x in range(4):
     encode_file.readline()
@@ -12,7 +26,7 @@ for x in range((int(sys.argv[1]) - 1) * 2 + 1):
 	  encode_file.readline()
 encoding = encode_file.readline()
 encoding = encoding[3:]
-print "Encoding:  " + encoding
+#print "Encoding:  " + encoding
 sigma = encoding.split('|')[0]
 states = encoding.split('|')[1]
 start = encoding.split('|')[2]
@@ -21,14 +35,14 @@ final = encoding.split('|')[4]
 string = encoding.split('|')[5]
 
 
-print "--------------lines----------"
-print sigma
-print states
-print start
-print delta
-print final
-print string
-print"----------------------------"
+print "-------Input from file----------"
+print "Sigma: " + sigma
+print "Q: " + states
+print "Start: " + start
+print "Delta: " + delta
+print "Final: " + final
+print "Input string: " + string
+print"---------------------------------\n"
 
 #Listifying input
 states = states.split(",")
@@ -36,12 +50,12 @@ sigma = sigma.split(",")
 final = final.split(",")
 currentState = start
 string = list(string)
-print string
+#print string
 try:
     string.remove("\n")
 except:
     pass
-print string
+#print string
 
 #Building empty DFA from states and sigma
 DFA = dict.fromkeys(states, None)
@@ -57,19 +71,18 @@ for x in DFA:
 
 #Parse transitions string and add transitions to the DFA
 Q = delta.split("/")
-print "Q is ----- " + str(Q)
-print "\n"
+#print "Q is ----- " + str(Q)
+#print "\n"
 
-print "input----------------------------"
 
     
 
 for x in range(len(Q)):
 
      state = Q[x].split(":")
-     print "states is " + str(state)
+     #print "states is " + str(state)
      deltas = state[1].split(",")
-     print deltas
+     #print deltas
 
      for y in range(len(deltas)):
          transition = deltas[y].split("-") 
@@ -87,10 +100,10 @@ for x in DFA:
             exit()
 
 
-print "DFA populated------------------"
+print "-----Populated DFA------------------"
 print DFA
 print "\n"
-print "-------------------------------"
+print "------------------------------------\n"
 
 #print "DFA by line------------------"
 #for x in DFA:
